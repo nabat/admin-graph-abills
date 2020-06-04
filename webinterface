@@ -1,0 +1,9 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings FATAL => 'all';
+
+use Admingraph::JSON;
+our (%lang, $html);
+
+my $district_connection = JSON->connection_district();
