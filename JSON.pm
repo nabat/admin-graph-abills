@@ -9,15 +9,19 @@ use Admingraph::db::Admingraph;
 use JSON;
 use Data::Dumper;
 
-our (
-  $admin, $db, %conf
-);
+my $admin;
+my $db;
+my $conf;
 
-my $Admingraph  = Admingraph->new($db, $admin, \%conf);
+
 my $json        = JSON->new()->utf8(0);
 
 sub connection_district {
+  ($admin, $db, $CONF)=@_;
   print Dumper $db;
+  
+  my $Admingraph  = Admingraph->new($admin, $db, $CONF);
+  
   my (@district_connection_array) = ();
   my $district_connection = $Admingraph->district_connection();           # Подключенные по районам (Круг)
   for my $key (sort keys %{$district_connection}){
@@ -30,3 +34,5 @@ sub connection_district {
 
   return \@district_connection_array;
 }
+
+1
